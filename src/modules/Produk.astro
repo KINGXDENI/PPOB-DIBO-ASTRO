@@ -1,0 +1,25 @@
+---
+const response = await fetch('https://apistore.dibo.my.id/jenis-produk', {
+	headers: {
+		'x-api-key': '123Deni',
+	},
+});
+
+const products = await response.json();
+---
+
+<div class="px-4 pt-6">
+	<div class="grid w-full grid-cols-2 gap-4 xl:grid-cols-3">
+		{products.map((product: { foto: string | null | undefined; nama: string }) => (
+			<a 
+				href={`/Product/${product.nama}`} 
+				class="flex flex-col items-center justify-center p-2 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 dark:bg-gray-800 dark:border-gray-700 max-w-[120px]"
+				>
+				<img src={product.foto} alt={product.nama} class="w-10 h-10 mb-1 object-cover rounded-full" />
+				<h3 class="text-xs font-semibold text-gray-900 dark:text-white text-center">
+					{product.nama}
+				</h3>
+			</a>
+		))}
+	</div>
+</div>
